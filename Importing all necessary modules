@@ -1,0 +1,17 @@
+#Supplementary text-1
+"""Importing all necessary modules"""
+import cv2 
+import imutils
+import os
+import json
+from math import sin
+from matplotlib import pyplot as plt
+import statistics
+import scipy.signal as signal
+import numpy as np
+import scipy.signal as signal
+from scipy.interpolate import interp1d
+from operator import itemgetter, attrgetter 
+from openpyxl import Workbook, load_workbook
+from tkinter import Tk
+from tkinter.filedialog import askdirectory
