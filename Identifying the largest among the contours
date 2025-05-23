@@ -1,0 +1,24 @@
+#Supplementary text-6
+"""Identifying the largest among the contours"""
+def max_contour():
+ global dict_cont_max
+ dict_cont_max={}
+ count=0
+ for key1, value1 in (dict_cont.items()):
+ """Iteration over the contours""" 
+ for item in value1:
+ 
+ if len(dict_cont_max)==count and len(item)>0:
+ dict_cont_max[key1]=item
+ else:
+ 
+ if len(dict_cont_max)!=count and len(item)>le
+ del dict_cont_max[key1]
+ dict_cont_max[key1]=item
+ 
+ count+=1
+ return dict_cont_max 
+ 
+Supplementary Text 6 2
+max_contour=max_contour()
+print(max_contour)
