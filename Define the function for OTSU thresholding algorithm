@@ -1,0 +1,43 @@
+#Supplementary text-3
+"""Define the function for OTSU thresholding algorithm"""
+def otsu_thresholding():
+ for i in range(1, (len(file_input_path)+1)):
+ file=(str(i)+".jpeg")
+ 
+ input_file_name=os.path.join(input_path, file)
+ if file in file_input_path:
+ 
+ cv2.namedWindow("output", cv2.WINDOW_NORMAL) 
+ image=cv2.imread(input_file_name)
+ imS = cv2.resize(image, (960, 540))
+ 
+ image1=cv2.imread(input_file_name)
+ """Conversion from RGB mode to gray"""
+ gray=cv2.cvtColor(imS, cv2.COLOR_BGR2GRAY)
+ """Converting the grayscale image into Otsu's bina
+ (T, threshold)=cv2.threshold(gray, 0, 255, cv2.THR
+ global folder_path_threshold
+ 
+ folder_path_threshold=os.path.join(File_input, "T
+ if os.path.isdir(folder_path_threshold):
+ 
+ file_path_threshold=os.path.join(folder_path_
+ else:
+ os.makedirs(folder_path_threshold)
+Supplementary Text 3 2
+ file_path_threshold=os.path.join(folder_path_
+ global folder_path_gray
+ folder_path_gray=os.path.join(File_input, "Graysca
+ if os.path.isdir(folder_path_gray):
+ file_path_gray=os.path.join(folder_path_gray, 
+ else:
+ os.makedirs(folder_path_gray)
+ file_path_gray=os.path.join(folder_path_gray, 
+ """Write the threshold images to an output folder
+ cv2.imwrite(file_path_threshold, threshold)
+ cv2.imwrite(file_path_gray, gray)
+ 
+ 
+input_path=folder_path_rawimages
+file_input_path=os.listdir(input_path)
+otsu_thresholding()
