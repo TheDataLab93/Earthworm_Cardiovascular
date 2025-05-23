@@ -1,0 +1,30 @@
+#Supplementary text-5
+"""Define a function to draw contours"""
+def drawcontours():
+ for i in range(len_keys_cont):
+ file=str(i+1)+".jpeg"
+ 
+ """Getting the threshold images"""
+ out_file=os.path.join(folder_path_threshold, file)
+ image_file=cv2.imread(out_file)
+ 
+ """checking if the image was read"""
+ retval=cv2.haveImageReader(out_file)
+ image_cont=dict_cont[keys_cont[i]]
+ 
+ folder_path_rawcont=os.path.join(File_input, "raw_con
+ """Use the drawContours() for drawing the contours"""
+ cv2.drawContours(image_file, image_cont, -1, (0,255,0
+ 
+ if os.path.isdir(folder_path_rawcont):
+ file_path_rawcont=os.path.join(folder_path_rawcon
+ cv2.imwrite(file_path_rawcont, image_file)
+ 
+ else:
+Supplementary Text 5 2
+ os.makedirs(folder_path_rawcont)
+ file_path_rawcont=os.path.join(folder_path_rawcon
+ cv2.imwrite(file_path_rawcont, image_file)
+keys_cont=list(dict_cont.keys())
+len_keys_cont=len(keys_cont)
+drawcontours()
