@@ -1,0 +1,49 @@
+#Supplementary text - 13
+"""Writing the time-series data to JSON format file"""
+def final_data(data):
+    
+    time_amplitude_data = {}
+    """convert the data to  json serializable format"""
+    for k, v in data.items():
+        print(f"type(k), {type(k)}, type(v), {type(v)}")
+        
+        if isinstance(k, (np.float32, np.float64, np.int64, np.int32)):
+            print("yes: k is int32")
+            k=float(k)
+
+        if isinstance(v, (np.int32, np.float32)):
+            print("yes: v is int32")
+            v=float(v)
+                
+        time_amplitude_data[k] = v
+        
+    return time_amplitude_data
+       
+    
+
+def json_time_amplitude():
+    
+    data = final_data(time_series)
+    file_path = f"{File_input}/json_time_amplitude/json_time_amplitude.json"
+    """try except to save the data to a json file"""
+    try:
+        
+        with open(file_path, 'w') as w_file:
+            json.dump(data, w_file)
+        
+    except FileNotFoundError as e:
+        
+        print(e)
+        new_path = "/".join(file_path.split("/")[:-1])
+        print(f"Creating new path: {new_path}")
+        os.makedirs(new_path)
+        with open(file_path, 'w') as w_file:
+            json.dump(data, w_file)
+        
+    except Exception as e:
+        
+        print(f"Error while saving the data to a json file:{e}")
+        
+json_time_amplitude()
+    
+plt.show()               
