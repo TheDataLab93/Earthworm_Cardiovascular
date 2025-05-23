@@ -1,0 +1,36 @@
+#Supplementary text-9
+"""Annotating the maximum of X, of the largest contour."""
+def maxxAnnotation():
+
+    for i in range(1, len_file_input+1):
+
+        file=str(i)+".jpeg"
+ 
+        file_path=os.path.join(file_input, file)
+
+        """Reading the images"""
+        image=cv2.imread(file_path)
+
+        get_value=list(dict_cont_maxx.values())[i-1]
+
+        """Annotating the maximum X value on the image."""
+        cv2.putText(image, str(get_value), tuple(get_value), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,0))
+
+        folder_path_maxannotated=os.path.join(File_input, "max_annotated")
+
+        if os.path.isdir(folder_path_maxannotated):
+
+            file_path_maxannotated=os.path.join(folder_path_maxannotated, file)
+            cv2.imwrite(file_path_maxannotated, image)
+
+        else:
+
+            os.makedirs(folder_path_maxannotated)
+            file_path_maxannotated=os.path.join(folder_path_maxannotated, file)
+            cv2.imwrite(file_path_maxannotated, image)
+ 
+file_input=os.path.join(File_input, "maximum_contour")
+
+len_file_input=len(os.listdir(file_input))
+
+maxxAnnotation()
