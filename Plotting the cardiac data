@@ -1,0 +1,78 @@
+#Supplementary text-10
+"""Get all the X-values"""
+def getXvalue():
+
+    global list_maxx
+    
+    list_maxx=[]
+
+    list_cont_maxx=list(dict_cont_maxx.values())
+
+    for x, y in list_cont_maxx:
+
+        list_maxx.append(x)
+
+    return list_maxx
+
+Xvalue=getXvalue()
+print(Xvalue)
+
+#Supplementary text-11
+"""Mapping between time and amplitude"""
+def rawData():
+
+    global time_series
+    
+    time_series=(np.arange(0, (len(Xvalue)*framerate), framerate)).tolist()
+
+    global dict_rawdata
+
+    dict_rawdata={}
+    for i in range(len(time_series)):
+
+
+
+        dict_rawdata[time_series[i]]=Xvalue[i]
+
+    return dict_rawdata
+
+
+rawdata=rawData()
+
+#Supplementary text-12
+"""Plotting the cardiac data"""
+"""time data and the amplitude data."""
+t = np.array(list(dict_rawdata.keys()))
+x = np.array(list(dict_rawdata.values()))
+
+t_ = list(dict_rawdata.keys())
+x_ = list(dict_rawdata.values())
+
+time_series = {k:v for k, v in zip(t_, x_)}
+
+"""Finding the threshold values of diastoles and systoles"""
+thresh_top = np.median(x) + 1 * np.std(x)
+thresh_bottom = np.median(x) - 1 * np.std(x)
+
+"""Finding the inexes of diastoles and systoles"""
+peak_idx, _ = find_peaks(x, height=thresh_top)
+valley_idx, _ = find_peaks(-x, height=-thresh_bottom)
+
+"""Plotting the graph"""
+plt.figure(figsize=(14,12))
+plt.plot(t, x, color='b', label='data')
+plt.scatter(t, x, s=10,c='b',label='value')
+3
+"""Plotting the threshold"""
+plt.plot([min(t), max(t)], [thresh_top, thresh_top],   '--',  color='r', label='peaks-threshold')
+plt.plot([min(t), max(t)], [thresh_bottom, thresh_bottom], '--',  color='g', label='valleys-threshold')
+
+plt.plot(t[peak_idx], x[peak_idx],     "x", color='r', label='peaks')
+plt.plot(t[valley_idx], x[valley_idx], "x", color='g', label='valleys')
+
+plt.xticks(rotation=45)
+plt.ylabel('value')
+plt.xlabel('timestamp')
+plt.title(f'data over time for username=target')
+plt.legend()
+plt.gcf().autofmt_xdate()
