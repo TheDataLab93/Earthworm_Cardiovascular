@@ -1,0 +1,32 @@
+#Supplementary text-7
+"""Drawing the largest contour"""
+def drawMaxContour():
+ try: 
+ for i in range(file_length):
+ file=str(i+1)+".jpeg"
+ in_file=os.path.join(file_input, file)
+ if os.path.isfile(in_file)==True:
+ image=cv2.imread(in_file)
+ if cv2.haveImageReader(in_file)==True:
+ gray=cv2.cvtColor(image, cv2.COLOR_BGR2GRA
+ """Converting the images to binary thresho
+ (T, threshold)=cv2.threshold(gray, 0, 255
+ image_=cv2.cvtColor(threshold, cv2.COLOR_G
+ """Drawing contours"""
+ cv2.drawContours(image_, dict_cont_max[key
+ 
+ folder_path_maxcontour=os.path.join(File_i
+ if os.path.isdir(folder_path_maxcontour):
+Supplementary Text 7 2
+ file_path_maxcontour=os.path.join(fold
+ cv2.imwrite(file_path_maxcontour, imag
+ 
+ else:
+ os.makedirs(folder_path_maxcontour)
+ file_path_maxcontour=os.path.join(fold
+ cv2.imwrite(file_path_maxcontour, imag
+ except:
+ pass
+file_input=folder_path_gray
+file_length=(len(os.listdir(file_input)))
+drawMaxContour()
