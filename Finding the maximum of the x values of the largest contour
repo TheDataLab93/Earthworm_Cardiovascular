@@ -1,0 +1,39 @@
+#Supplementary text-8
+"""Finding the maximum of the x values of the largest contour"""
+def contourMaxX():
+
+    global dict_cont_maxx
+
+    dict_cont_maxx={}
+    count=0
+   
+    for keys_, values_ in (dict_cont_max.items()):
+
+        for value1 in values_.tolist()
+
+              for value2 in value1:
+
+                  for i in range (len(value2)):
+
+                      if len(dict_cont_maxx)==count:
+
+                          dict_cont_maxx[keys_]=[value2[0], value2[1]]
+
+                      else:
+
+                          if len(dict_cont_maxx)!=count and value2[0]>dict_cont_maxx[keys_][0]:
+
+                              del dict_cont_maxx[keys_]
+
+                              dict_cont_maxx[keys_]=[value2[0], value2[1]]
+                              
+
+
+        count+=1
+
+    return dict_cont_maxx
+
+keys_maxima=list(dict_cont_max.values())
+maxX=contourMaxX()
+
+print(" dict_cont_maxx :", maxX)
