@@ -1,68 +1,72 @@
 #Supplementary text-2
 """Generating frames from the video every 33 millisecond"""
 def getFrame(sec):
- 
- """Capture video-frames on a millisecond time-scale"""
- vid_file.set(cv2.CAP_PROP_POS_MSEC, sec*1000)
- 
- """Read the captured frame video_handle.read() that re
-turns two values: a boolean value #and the captured imag
-e"""
- Frames, image=vid_file.read()
- global folder_path_rawimages
- 
- folder_path_rawimages=os.path.join(File_input, "raw_ima
-ges")
- 
- if os.path.isdir(folder_path_rawimages):
- file_name=str(cnt)+".jpeg"
- 
- file_path_rawimages=os.path.join(folder_path_rawima
-ges, file_name)
- 
- else: 
- 
- os.makedirs(folder_path_rawimages)
- 
- file_name=str(cnt)+".jpeg"
- 
- file_path_rawimages=os.path.join(folder_path_rawima
-ges, file_name)
- 
-Supplementary Text 2 2
- if Frames:
- 
- """Write the image to the output folder"""
- cv2.imwrite(file_path_rawimages, image)
- return Frames
+     
+    """Capture video-frames on a millisecond time-scale"""
+    vid_file.set(cv2.CAP_PROP_POS_MSEC, sec*1000)
+    
+
+    """Read the captured  frame video_handle.read() that returns two values: a boolean value #and the captured image"""
+    Frames, image=vid_file.read()
+    global folder_path_rawimages
+       
+    folder_path_rawimages=os.path.join(File_input, "raw_images")
+    
+    if os.path.isdir(folder_path_rawimages):
+
+        file_name=str(cnt)+".jpeg"
+              
+        file_path_rawimages=os.path.join(folder_path_rawimages, file_name)
+        
+    else:    
+  
+        os.makedirs(folder_path_rawimages)
+       
+        file_name=str(cnt)+".jpeg"
+                
+        file_path_rawimages=os.path.join(folder_path_rawimages, file_name)
+       
+    if Frames:
+        
+    """Write the image to the output folder"""
+        cv2.imwrite(file_path_rawimages, image)
+
+    return Frames
+
 def set_path():
- """create an instance of the Tk class."""
- root = Tk()
- File_input = askdirectory(parent = root, initialdir=
-r"D:\publication\cardiovascular paper\Worksite\control1\vid
-eo1", title = "select the Directory")
- root.destroy()
- return File_input
- 
-File_input=set_path()#r"D:\publication\cardiovascular paper
-\Worksite\control1\video1"
+    """create an instance of the Tk class."""
+    root = Tk()
+    File_input = askdirectory(parent = root, initialdir=r"D:\publication\cardiovascular paper\Worksite\control1\video1", title = "select the Directory")
+    root.destroy()
+    return File_input
+    
+File_input=set_path()#r"D:\publication\cardiovascular paper\Worksite\control1\video1"
+
 name_of_the_file="heart.mp4"
+
 file_path=os.path.join(File_input, name_of_the_file)
+
+
 """Video input""" 
 vid_file=cv2.VideoCapture(file_path)
+
 #Initializing time and count
 sec=0
 cnt=1
+
 """Function call to getFrame()""" 
 get_frame=getFrame(sec)
+
 """Frame rate is set at 33 millisecond"""
 framerate=0.033
+
 while get_frame:
-Supplementary Text 2 3
- cnt+=1 
- sec=sec+framerate
- 
+
+    cnt+=1   
+    sec=sec+framerate
+    
 """round off the time value to two decimal points"""
- sec=round(sec, 2)
+    sec=round(sec, 2)
+
 """Function call to getFrame()""" 
- get_frame=getFrame(sec)
+    get_frame=getFrame(sec)
